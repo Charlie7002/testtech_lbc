@@ -1,0 +1,10 @@
+.send {
+	position: relative;
+	width: 100%;
+	max-width: 700px;
+}
+.send_btn {
+	position: absolute;
+	top: 0.2rem;
+	right: 0.5rem;
+}

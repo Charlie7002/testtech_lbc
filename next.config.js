@@ -1,9 +1,12 @@
 module.exports = {
-  i18n: {
-    locales: ['en-US'],
-    defaultLocale: 'en-US',
-  },
-  eslint: {
-    ignoreDuringBuilds: true,
-  }
-}
+	i18n: {
+		locales: ['en-US'],
+		defaultLocale: 'en-US',
+	},
+	eslint: {
+		ignoreDuringBuilds: true,
+	},
+	images: {
+		domains: ['i.pravatar.cc'],
+	},
+};
