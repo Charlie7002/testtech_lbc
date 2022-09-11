@@ -9,10 +9,10 @@ In addition to your code, a README explaining your thought process and your choi
 
 # Exercice :
 
-- Display a list of all the conversations
-- Allow the user to select a conversation
-  - Inside the conversation, there is a list of all the messages between these two users.
-  - As a user, you can type and send new messages in this conversation
+-  Display a list of all the conversations
+-  Allow the user to select a conversation
+   -  Inside the conversation, there is a list of all the messages between these two users.
+   -  As a user, you can type and send new messages in this conversation
 
 **As your application can be used by millions of users, make sure to provide some robust safety guards.**
 
@@ -22,7 +22,7 @@ Obvisouly, it is up to you to make something nice and pretty, you are free to de
 
 <details>
   <summary>Click to see the sketches</summary>
-  
+
 Mobile list :
 
 ![](./sketches/list-mobile.jpg)
@@ -64,8 +64,28 @@ We love creativity and technical challenges.
 
 If you are out of ideas, here are some thoughts :
 
-- As we want to reach our users anywhere, we need to make sure the app is performing well. What can you do to make it really fast ?
+-  As we want to reach our users anywhere, we need to make sure the app is performing well. What can you do to make it really fast ?
 
-- Our goal is to support everybody in the country, including people with disabilities. As a good citizen and a good developer, can you make sure the app is accessible for everyone ?
+-  Our goal is to support everybody in the country, including people with disabilities. As a good citizen and a good developer, can you make sure the app is accessible for everyone ?
 
-- We all love to relax after a hard day’s work. It would be a shame if we didn’t feel confident enough about the upcoming automatic deployment. Are you sure everything has been tested thoroughly ?
+-  We all love to relax after a hard day’s work. It would be a shame if we didn’t feel confident enough about the upcoming automatic deployment. Are you sure everything has been tested thoroughly ?
+
+# Test Technique Charlotte Cachet
+
+Dev depencencies added :
+-axios / Personal preference for fetch data from api
+-react-icons / Icons for the app
+I use the hook useState to manage the global state. I think Redux is overkill for this project.
+
+## Available Scripts
+
+In the project directory, run:
+
+### `npm run dev`
+
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+
+### `npm run start-server`
+
+Launches the server in the background.\
