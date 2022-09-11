@@ -11,13 +11,11 @@
 	transition: all 0.3s ease;
 	cursor: pointer;
 }
-
 .avatar {
 	width: 100%;
 	height: 100%;
 	border-radius: 1.5rem;
 }
-
 .user_info {
 	width: 70%;
 	height: 100%;

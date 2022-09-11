@@ -2,9 +2,22 @@
 	position: relative;
 	width: 100%;
 	max-width: 700px;
+	margin: 0 3rem 1rem;
 }
 .send_btn {
 	position: absolute;
 	top: 0.2rem;
 	right: 0.5rem;
+	opacity: 0.8;
+	transition: all 0.3s ease;
+}
+
+.send_btn:hover {
+	opacity: 1;
+}
+
+@media (max-width: 460px) {
+	.send {
+		margin: 0.5rem;
+	}
 }

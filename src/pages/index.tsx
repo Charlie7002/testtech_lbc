@@ -4,20 +4,16 @@ import { Conversation } from '../types/conversation';
 import UserCard from '../components/UserCard';
 import { UserContext } from '../context/userContext';
 
-// interface Props {
-// 	conversations: Conversation[];
-// }
-
 const Home: FC = () => {
-	const { conversations, userInfo } = useContext<any>(UserContext);
+	const { user } = useContext<any>(UserContext);
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.title}>
-				Hello <span className={styles.userName}>{userInfo.nickname}</span> :){' '}
+				Hello <span className={styles.userName}>{user.userInfo.nickname}</span> :){' '}
 			</div>
 			<div className={styles.cardList}>
-				{conversations?.map((conv: Conversation) => (
+				{user.conversations?.map((conv: Conversation) => (
 					<UserCard key={conv.id} {...conv} />
 				))}
 			</div>

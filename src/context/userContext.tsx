@@ -2,33 +2,39 @@ import { createContext, useEffect, useState } from 'react';
 import { getLoggedUserId } from '../utils/getLoggedUserId';
 import axios from 'axios';
 
-const UserContext = createContext('');
+const UserContext = createContext<UserContextProps>(null);
+import { UserState, UserContextProps } from '../types/user';
 
 // Default way to get a logged user
 export const LoggedUserId = getLoggedUserId();
 
 const UserProvider = ({ children }) => {
-	const [userId, setUserId] = useState(LoggedUserId);
-	const [user, setUser] = useState<any>({ userInfo: {}, conversations: [] });
+	const [user, setUser] = useState<UserState>({ userInfo: {}, conversations: [] });
+	const [refresh, setRefresh] = useState(false);
 
 	const userLogged = async () => {
-		console.log('userLogged');
-		await axios
-			.get(`http://localhost:3005/users/${LoggedUserId}`)
-			.then(res => setUser({ userInfo: res.data }))
-			.catch(err => console.log(err));
+		try {
+			await axios
+				.get(`http://localhost:3005/users/${LoggedUserId}`)
+				.then(res => setUser(prev => ({ ...prev, userInfo: res.data })))
+				.catch(err => console.log(err));
 
-		await axios
-			.get(`http://localhost:3005/conversations/${LoggedUserId}`)
-			.then(res => setUser(prev => ({ ...prev, conversations: res.data })))
-			.catch(err => console.log(err));
+			await axios
+				.get(`http://localhost:3005/conversations/${LoggedUserId}`)
+				.then(res => setUser(prev => ({ ...prev, conversations: res.data })))
+				.catch(err => console.log(err));
+		} catch (err) {
+			console.log(err.message);
+		}
 	};
 
 	useEffect(() => {
 		userLogged();
-	}, [LoggedUserId]);
+	}, [LoggedUserId, refresh]);
 
-	return <UserContext.Provider value={user}>{children}</UserContext.Provider>;
+	return (
+		<UserContext.Provider value={{ user, refresh, setRefresh }}>{children}</UserContext.Provider>
+	);
 };
 
 export { UserContext, UserProvider };

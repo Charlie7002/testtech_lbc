@@ -12,13 +12,10 @@ interface Props {
 }
 
 const Chat: FC = ({ messages }: Props) => {
-	const { userInfo, conversations } = useContext<any>(UserContext);
+	const { user } = useContext<any>(UserContext);
 	const router = useRouter();
 	const { id } = router.query;
-	const findLast = () => {
-		const time = conversations.find(conversation => conversation.id === id).lastMessageTimestamp;
-		return formatDate(time, 'my');
-	};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.title}>
@@ -32,11 +29,13 @@ const Chat: FC = ({ messages }: Props) => {
 				</div>
 				<div className={styles.title_userInfo}>
 					<h6 className={styles.title_userInfo__name}>
-						{userInfo.nickname} <span>- You</span>
+						{user.userInfo.nickname} <span>- You</span>
 					</h6>
 					<div>
-						{messages.length > 0 && (
-							<span>Last message : {formatDate(messages[0].timestamp, 'dhm')} </span>
+						{messages && messages.length > 0 && (
+							<span>
+								Last message : {formatDate(messages[messages.length - 1].timeStamp, 'my')}{' '}
+							</span>
 						)}
 					</div>
 				</div>
@@ -44,23 +43,23 @@ const Chat: FC = ({ messages }: Props) => {
 			<div className={styles.messages_container}>
 				<div className={styles.messages_container_box}>
 					{messages.length > 0 &&
-						messages.map((message: any) => (
+						messages.map((message: Message) => (
 							<div
 								key={message.id}
 								style={{
 									justifyContent:
-										userInfo.id == message.authorId ? 'flex-end' : 'flex-start',
-									left: userInfo.id == message.authorId ? '0' : '-50px',
+										user.userInfo.id == message.authorId ? 'flex-end' : 'flex-start',
+									left: user.userInfo.id == message.authorId ? '0' : '-50px',
 								}}
 								className={styles.message}
 							>
 								<span
 									style={{
 										background:
-											userInfo.id == message.authorId
+											user.userInfo.id == message.authorId
 												? 'var(--primary)'
 												: 'var(--primary-light)',
-										color: userInfo.id == message.authorId ? 'white' : 'var(--font)',
+										color: user.userInfo.id == message.authorId ? 'white' : 'var(--font)',
 									}}
 								>
 									{message.body}
@@ -80,9 +79,13 @@ const Chat: FC = ({ messages }: Props) => {
 
 export async function getServerSideProps({ params }) {
 	const { id } = params;
-	const res = await fetch(`http://localhost:3005/messages/${id}`);
-	const data = await res.json();
-	return { props: { messages: data } };
+	try {
+		const res = await fetch(`http://localhost:3005/messages/${id}`);
+		const data = await res.json();
+		return { props: { messages: data } };
+	} catch (err) {
+		console.log(err.message);
+	}
 }
 
 export default Chat;

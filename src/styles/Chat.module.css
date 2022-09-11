@@ -38,31 +38,29 @@
 
 .messages_container {
 	width: 100%;
-	max-height: 90%;
+	padding-top: 10px;
 	display: flex;
 	flex-direction: column;
 	gap: 0.5rem;
 	align-items: flex-end;
 	justify-content: flex-end;
-	/* height: calc(80% - 60px); */
-	/* overflow-y: scroll;
-	overflow-x: hidden; */
 }
 
 .messages_container_box {
 	width: 100%;
-	max-height: 90%;
+	max-height: 80vh;
 	display: flex;
 	flex-direction: column;
 	gap: 0.5rem;
 	width: fit-content;
 	position: relative;
 	padding: 2rem;
+	overflow-y: auto;
+	overflow-x: visible;
 }
 
 .message {
 	display: flex;
-	/* justify-content: flex-end; */
 	position: relative;
 }
 
@@ -71,11 +69,21 @@
 	border-radius: 30px;
 	padding: 0.45rem 1rem;
 	font-size: 0.9rem;
+	margin-left: 50px;
 }
 
 .messages_send {
 	width: 100%;
 	display: flex;
 	justify-content: center;
-	align-items: center;
+}
+
+@media (max-width: 460px) {
+	.messages_container_box {
+		padding: 0.5rem;
+		width: 100%;
+	}
+	.message {
+		left: 0 !important;
+	}
 }
