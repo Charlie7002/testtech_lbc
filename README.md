@@ -4,7 +4,9 @@ Dev depencencies added :
 
 -  axios / Personal preference for fetch data from api
 -  react-icons / Icons for the app
-   I use the hook useState to manage the global state. I think Redux is overkill for this project.
+
+I use the hook useState to manage the global state.
+I think Redux is overkill for this project.
 
 ## Available Scripts
 
